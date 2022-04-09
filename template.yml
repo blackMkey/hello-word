@@ -20,4 +20,6 @@ Resources:
       KeyName: 'admin-key'
       ImageId: 'ami-04505e74c0741db8d' 
       InstanceType: t3.micro
-  
+      Tags:
+        - Key: 'ec2-tag'
+          Value: 'my-ec2'
