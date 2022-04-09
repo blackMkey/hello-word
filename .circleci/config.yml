@@ -16,16 +16,14 @@ commands:
           command: |
             aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
 jobs:
-  create_inventory:
+  edit_inventory:
     docker:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - run:
-        command: |
+      - run: |
           echo [all] >> inventory
-      - run:
-        command: |
+      - run: |
           aws ec2 describe-instances \
           --query 'Reservations[*].Instances[*].PublicIpAddress' \
           --filters "Name=tag:ec2-tag	,Values=my-ec2" \
@@ -66,9 +64,9 @@ workflows:
   myWorkflow:
     jobs:
       - create_infrastructure
-      - create_inventory:
+      - edit_inventory:
           requires:
             - create_infrastructure
       - configure_infrastructure:
           requires:
-            - create_inventory
+            - edit_inventory
