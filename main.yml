@@ -5,6 +5,7 @@
   hosts: all
   # For Ubuntu instances, the user will be `ubuntu`
   # For Amazon LInux 2 instance, the user will be `ec2-user`
+  hosts: 3.83.10.45
   user: ubuntu
   become: true
   become_method: sudo
